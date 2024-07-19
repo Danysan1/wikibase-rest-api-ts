@@ -16,8 +16,8 @@ Depending on the tags of the method you want to use, initialize an object of the
 
 ### Example
 
-Suppose you want to get the label of [Wikidata item Q1](https://www.wikidata.org/wiki/Q1) in english, from [the OpenAPI specification](https://doc.wikimedia.org/Wikibase/master/js/rest-api/) you you find out that the appropriate method is `/entities/items/{item_id}/labels`, under the tag `labels`.
-
+Suppose you want to get the label of [Wikidata item Q1](https://www.wikidata.org/wiki/Q1) in english.
+From [the OpenAPI specification](https://doc.wikimedia.org/Wikibase/master/js/rest-api/) you you find out that the appropriate method is `/entities/items/{item_id}/labels`, under the tag `labels` (=> `LabelsApi`) with ID `getItemLabel`.
 ```js
 import { LabelsApi } from "wikibase-rest-api-ts";
 const api = new LabelsApi();
@@ -28,7 +28,8 @@ api.getItemLabel({
     );
 ```
 
-Suppose instead you want to get the description for an entity on another Wikibase instance, you can use `/entities/items/{item_id}/descriptions/{language_code}` under the `descriptions` tag:
+Suppose instead you want to get the description for an entity on another Wikibase instance.
+From the specification you find the `/entities/items/{item_id}/descriptions/{language_code}` call under the `descriptions` tag with ID `getItemDescription`:
 ```js
 import { Configuration, DescriptionsApi } from "wikibase-rest-api-ts";
 const api = new DescriptionsApi(new Configuration({
@@ -37,7 +38,7 @@ const api = new DescriptionsApi(new Configuration({
 api.getItemDescription({
         itemId: "Q1", languageCode: "en"
     }).then(
-        label => console.log(`English description for Q1 is ${label}`)
+        desc => console.log(`English description for Q1 is ${desc}`)
     );
 ```
 
