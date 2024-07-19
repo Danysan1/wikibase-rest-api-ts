@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.7.0",
+    "generators": {
+      "wikibase": {
+        "glob": "./wikibase.json",
+        "output": "./src/generated",
+        "generatorName": "typescript-fetch",
+        "skipValidateSpec": true
+      }
+    }
+  }
+}
