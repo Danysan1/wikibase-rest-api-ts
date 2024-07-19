@@ -5,7 +5,7 @@
     "version": "7.7.0",
     "generators": {
       "wikibase": {
-        "glob": "./wikibase.json",
+        "glob": "./openapi.json",
         "output": "./src/generated",
         "generatorName": "typescript-fetch",
         "skipValidateSpec": true

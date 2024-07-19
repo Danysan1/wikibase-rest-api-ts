@@ -1,4 +1,5 @@
 import { DescriptionsApi } from "../../dist/index";
+// import { DescriptionsApi } from "wikibase-rest-api-ts";
 
 const api = new DescriptionsApi();
 

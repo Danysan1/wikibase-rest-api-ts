@@ -1,6 +1,6 @@
 {
   "name": "wikibase-rest-api-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Typescript model and API code for interacting with the REST API of a Wikibase instance (like Wikidata)",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -10,12 +10,10 @@
   ],
   "scripts": {
     "test": "jest",
-    "generate-api": "openapi-generator-cli generate",
-    "g": "npm run generate-api",
-    "clean-on-nix": "rm -rf ./src/generated",
-    "c": "npm run clean-on-nix",
-    "clean-on-win": "rmdir /s /q src\\generated",
-    "cw": "npm run clean-on-win",
+    "generate": "openapi-generator-cli generate",
+    "clean": "rm -rf ./src/generated ./dist",
+    "clean:windows": "rmdir /s /q src\\generated dist",
+    "fix": "sh fix.sh",
     "build": "tsup",
     "list-versions": "openapi-generator-cli version-manager list"
   },
@@ -27,10 +25,18 @@
     "wikibase",
     "wikidata",
     "typescript",
+    "linked data",
     "rest",
     "api"
   ],
-  "author": "Daniele Santini",
+  "author": {
+    "name": "Daniele Santini",
+    "url": "https://www.dsantini.it"
+  },
+  "funding": {
+    "type": "paypal",
+    "url": "https://paypal.me/dsantiniit"
+  },
   "license": "LGPL-3.0-or-later",
   "bugs": {
     "url": "https://gitlab.com/openetymologymap/wikibase-rest-api-ts/issues"

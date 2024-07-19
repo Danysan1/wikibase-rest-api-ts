@@ -1,4 +1,5 @@
 import { LabelsApi } from "../../dist/index";
+// import { LabelsApi } from "wikibase-rest-api-ts";
 
 const api = new LabelsApi();
 
