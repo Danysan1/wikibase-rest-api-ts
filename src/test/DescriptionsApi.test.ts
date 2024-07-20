@@ -1,4 +1,4 @@
-import { DescriptionsApi } from "../../dist/index";
+import { DescriptionsApi } from "../../dist";
 // import { DescriptionsApi } from "wikibase-rest-api-ts";
 
 const api = new DescriptionsApi();
@@ -11,8 +11,8 @@ test("getItemDescription", async () => {
 
 test("getItemDescriptions", async () => {
     const descrs = await api.getItemDescriptions({ itemId: "Q1" });
-    expect(typeof descrs === "object").toBeTruthy();
-    expect(descrs?.en).toBeTruthy();
+    expect(descrs).toBeTruthy();
+    expect(typeof descrs).toMatch("object");
     expect(descrs.en).toMatch(/space/i);
 });
 
@@ -23,8 +23,8 @@ test("getPropertyDescription", async () => {
 });
 
 test("getPropertyDescriptions", async () => {
-    const descrs = await api.getPropertyDescriptions({ propertyId: "P31"});
-    expect(typeof descrs === "object").toBeTruthy();
-    expect(descrs?.en).toBeTruthy();
+    const descrs = await api.getPropertyDescriptions({ propertyId: "P31" });
+    expect(descrs).toBeTruthy();
+    expect(typeof descrs).toMatch("object");
     expect(descrs.en).toMatch(/class/i);
 });

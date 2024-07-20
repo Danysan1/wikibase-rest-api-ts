@@ -17,7 +17,9 @@
     "/openapi.json": {
       "get": {
         "operationId": "getOpenApiDoc",
-        "tags": ["OpenAPI document"],
+        "tags": [
+          "OpenAPI document"
+        ],
         "summary": "Retrieve the OpenAPI document",
         "responses": {
           "200": {
@@ -45,7 +47,9 @@
     "/property-data-types": {
       "get": {
         "operationId": "getPropertyDataTypes",
-        "tags": ["Property data types"],
+        "tags": [
+          "Property data types"
+        ],
         "summary": "Retrieve the map of property data types to value types",
         "responses": {
           "200": {
@@ -70,7 +74,9 @@
     "/entities/items": {
       "post": {
         "operationId": "addItem",
-        "tags": ["items"],
+        "tags": [
+          "items"
+        ],
         "summary": "Create a Wikibase Item",
         "parameters": [
           {
@@ -99,7 +105,9 @@
     "/entities/items/{item_id}": {
       "get": {
         "operationId": "getItem",
-        "tags": ["items"],
+        "tags": [
+          "items"
+        ],
         "summary": "Retrieve a single Wikibase Item by ID",
         "parameters": [
           {
@@ -150,7 +158,9 @@
       },
       "patch": {
         "operationId": "patchItem",
-        "tags": ["items"],
+        "tags": [
+          "items"
+        ],
         "summary": "Change a single Wikibase Item by ID",
         "parameters": [
           {
@@ -197,7 +207,9 @@
     "/entities/items/{item_id}/sitelinks": {
       "get": {
         "operationId": "getSitelinks",
-        "tags": ["sitelinks"],
+        "tags": [
+          "sitelinks"
+        ],
         "summary": "Retrieve an Item's sitelinks",
         "parameters": [
           {
@@ -245,7 +257,9 @@
       },
       "patch": {
         "operationId": "patchSitelinks",
-        "tags": ["sitelinks"],
+        "tags": [
+          "sitelinks"
+        ],
         "summary": "Change an Item's sitelinks",
         "parameters": [
           {
@@ -292,7 +306,9 @@
     "/entities/items/{item_id}/sitelinks/{site_id}": {
       "get": {
         "operationId": "getSitelink",
-        "tags": ["sitelinks"],
+        "tags": [
+          "sitelinks"
+        ],
         "summary": "Retrieve an Item's sitelink",
         "parameters": [
           {
@@ -343,7 +359,9 @@
       },
       "put": {
         "operationId": "setSitelink",
-        "tags": ["sitelinks"],
+        "tags": [
+          "sitelinks"
+        ],
         "summary": "Add / Replace an item's sitelink",
         "parameters": [
           {
@@ -399,7 +417,9 @@
       },
       "delete": {
         "operationId": "deleteSitelink",
-        "tags": ["sitelinks"],
+        "tags": [
+          "sitelinks"
+        ],
         "summary": "Delete an Item's sitelink",
         "parameters": [
           {
@@ -452,7 +472,9 @@
     "/entities/properties/{property_id}": {
       "get": {
         "operationId": "getProperty",
-        "tags": ["properties"],
+        "tags": [
+          "properties"
+        ],
         "summary": "Retrieve a single Wikibase Property by ID",
         "parameters": [
           {
@@ -494,7 +516,9 @@
       },
       "patch": {
         "operationId": "patchProperty",
-        "tags": ["properties"],
+        "tags": [
+          "properties"
+        ],
         "summary": "Change a single Wikibase Property by ID",
         "parameters": [
           {
@@ -541,7 +565,9 @@
     "/entities/items/{item_id}/descriptions": {
       "get": {
         "operationId": "getItemDescriptions",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Retrieve an Item's descriptions",
         "parameters": [
           {
@@ -589,7 +615,9 @@
       },
       "patch": {
         "operationId": "patchItemDescriptions",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Change an Item's descriptions",
         "parameters": [
           {
@@ -637,7 +665,9 @@
     "/entities/properties/{property_id}/descriptions": {
       "get": {
         "operationId": "getPropertyDescriptions",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Retrieve a Property's descriptions",
         "parameters": [
           {
@@ -682,7 +712,9 @@
       },
       "patch": {
         "operationId": "patchPropertyDescriptions",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Change a Property's descriptions",
         "parameters": [
           {
@@ -730,7 +762,9 @@
     "/entities/items/{item_id}/descriptions/{language_code}": {
       "get": {
         "operationId": "getItemDescription",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Retrieve an Item's description in a specific language",
         "parameters": [
           {
@@ -781,7 +815,9 @@
       },
       "put": {
         "operationId": "replaceItemDescription",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Add / Replace an Item's description in a specific language",
         "parameters": [
           {
@@ -840,7 +876,9 @@
       },
       "delete": {
         "operationId": "deleteItemDescription",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Delete an Item's description in a specific language",
         "parameters": [
           {
@@ -893,7 +931,9 @@
     "/entities/properties/{property_id}/descriptions/{language_code}": {
       "get": {
         "operationId": "getPropertyDescription",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Retrieve a Property's description in a specific language",
         "parameters": [
           {
@@ -941,7 +981,9 @@
       },
       "put": {
         "operationId": "replacePropertyDescription",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Add / Replace a Property's description in a specific language",
         "parameters": [
           {
@@ -997,7 +1039,9 @@
       },
       "delete": {
         "operationId": "deletePropertyDescription",
-        "tags": ["descriptions"],
+        "tags": [
+          "descriptions"
+        ],
         "summary": "Delete a Property's description in a specific language",
         "parameters": [
           {
@@ -1047,7 +1091,9 @@
     "/entities/items/{item_id}/statements": {
       "get": {
         "operationId": "getItemStatements",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Retrieve Statements from an Item",
         "parameters": [
           {
@@ -1098,7 +1144,9 @@
       },
       "post": {
         "operationId": "addItemStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Add a new Statement to an Item",
         "parameters": [
           {
@@ -1142,7 +1190,9 @@
     "/entities/items/{item_id}/statements/{statement_id}": {
       "get": {
         "operationId": "getItemStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Retrieve a single Statement from an Item",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`",
         "parameters": [
@@ -1191,7 +1241,9 @@
       },
       "put": {
         "operationId": "replaceItemStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Replace a single Statement of an Item",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`",
         "parameters": [
@@ -1234,7 +1286,9 @@
       },
       "patch": {
         "operationId": "patchItemStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Change elements of a single Statement of an Item",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`.",
         "parameters": [
@@ -1283,7 +1337,9 @@
       },
       "delete": {
         "operationId": "deleteItemStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Delete a single Statement from an Item",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`",
         "parameters": [
@@ -1328,7 +1384,9 @@
     "/entities/items/{item_id}/labels": {
       "get": {
         "operationId": "getItemLabels",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Retrieve an Item's labels",
         "parameters": [
           {
@@ -1376,7 +1434,9 @@
       },
       "patch": {
         "operationId": "patchItemLabels",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Change an Item's Labels",
         "parameters": [
           {
@@ -1423,7 +1483,9 @@
     "/entities/properties/{property_id}/labels": {
       "get": {
         "operationId": "getPropertyLabels",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Retrieve a Property's labels",
         "parameters": [
           {
@@ -1468,7 +1530,9 @@
       },
       "patch": {
         "operationId": "patchPropertyLabels",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Change a Property's Labels",
         "parameters": [
           {
@@ -1515,7 +1579,9 @@
     "/entities/items/{item_id}/labels/{language_code}": {
       "get": {
         "operationId": "getItemLabel",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Retrieve an Item's label in a specific language",
         "parameters": [
           {
@@ -1566,7 +1632,9 @@
       },
       "put": {
         "operationId": "replaceItemLabel",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Add / Replace an Item's label in a specific language",
         "parameters": [
           {
@@ -1625,7 +1693,9 @@
       },
       "delete": {
         "operationId": "deleteItemLabel",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Delete an Item's label in a specific language",
         "parameters": [
           {
@@ -1678,7 +1748,9 @@
     "/entities/properties/{property_id}/labels/{language_code}": {
       "get": {
         "operationId": "getPropertyLabel",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Retrieve a Property's label in a specific language",
         "parameters": [
           {
@@ -1726,7 +1798,9 @@
       },
       "put": {
         "operationId": "replacePropertyLabel",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Add / Replace a Property's label in a specific language",
         "parameters": [
           {
@@ -1782,7 +1856,9 @@
       },
       "delete": {
         "operationId": "deletePropertyLabel",
-        "tags": ["labels"],
+        "tags": [
+          "labels"
+        ],
         "summary": "Delete a Property's label in a specific language",
         "parameters": [
           {
@@ -1832,7 +1908,9 @@
     "/entities/items/{item_id}/aliases": {
       "get": {
         "operationId": "getItemAliases",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Retrieve an Item's aliases",
         "parameters": [
           {
@@ -1880,7 +1958,9 @@
       },
       "patch": {
         "operationId": "patchItemAliases",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Change an Item's aliases",
         "parameters": [
           {
@@ -1927,7 +2007,9 @@
     "/entities/properties/{property_id}/aliases": {
       "get": {
         "operationId": "getPropertyAliases",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Retrieve a Property's aliases",
         "parameters": [
           {
@@ -1972,7 +2054,9 @@
       },
       "patch": {
         "operationId": "patchPropertyAliases",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Change a Property's aliases",
         "parameters": [
           {
@@ -2019,7 +2103,9 @@
     "/entities/items/{item_id}/aliases/{language_code}": {
       "get": {
         "operationId": "getItemAliasesInLanguage",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Retrieve an Item's aliases in a specific language",
         "parameters": [
           {
@@ -2070,7 +2156,9 @@
       },
       "post": {
         "operationId": "addItemAliasesInLanguage",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Create / Add an Item's aliases in a specific language",
         "parameters": [
           {
@@ -2131,7 +2219,9 @@
     "/entities/properties/{property_id}/aliases/{language_code}": {
       "get": {
         "operationId": "getPropertyAliasesInLanguage",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Retrieve a Property's aliases in a specific language",
         "parameters": [
           {
@@ -2179,7 +2269,9 @@
       },
       "post": {
         "operationId": "addPropertyAliasesInLanguage",
-        "tags": ["aliases"],
+        "tags": [
+          "aliases"
+        ],
         "summary": "Create / Add a Property's aliases in a specific language",
         "parameters": [
           {
@@ -2237,7 +2329,9 @@
     "/entities/properties/{property_id}/statements": {
       "get": {
         "operationId": "getPropertyStatements",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Retrieve Statements from a Property",
         "parameters": [
           {
@@ -2285,7 +2379,9 @@
       },
       "post": {
         "operationId": "addPropertyStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Add a new Statement to a Property",
         "parameters": [
           {
@@ -2326,7 +2422,9 @@
     "/entities/properties/{property_id}/statements/{statement_id}": {
       "get": {
         "operationId": "getPropertyStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Retrieve a single Statement from a Property",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`",
         "parameters": [
@@ -2375,7 +2473,9 @@
       },
       "put": {
         "operationId": "replacePropertyStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Replace a single Statement of a Property",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`",
         "parameters": [
@@ -2418,7 +2518,9 @@
       },
       "patch": {
         "operationId": "patchPropertyStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Change elements of a single Statement of a Property",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`.",
         "parameters": [
@@ -2467,7 +2569,9 @@
       },
       "delete": {
         "operationId": "deletePropertyStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Delete a single Statement from a Property",
         "description": "This endpoint is also accessible through `/statements/{statement_id}`.",
         "parameters": [
@@ -2512,7 +2616,9 @@
     "/statements/{statement_id}": {
       "get": {
         "operationId": "getStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Retrieve a single Statement",
         "description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
         "parameters": [
@@ -2558,7 +2664,9 @@
       },
       "put": {
         "operationId": "replaceStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Replace a single Statement",
         "description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
         "parameters": [
@@ -2598,7 +2706,9 @@
       },
       "patch": {
         "operationId": "patchStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Change elements of a single Statement",
         "description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
         "parameters": [
@@ -2644,7 +2754,9 @@
       },
       "delete": {
         "operationId": "deleteStatement",
-        "tags": ["statements"],
+        "tags": [
+          "statements"
+        ],
         "summary": "Delete a single Statement",
         "description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
         "parameters": [
@@ -2858,11 +2970,16 @@
         "examples": {
           "strong-etag": {
             "summary": "Single ETag",
-            "value": ["\"1276705620\""]
+            "value": [
+              "\"1276705620\""
+            ]
           },
           "multiple-etags": {
             "summary": "Multiple ETags",
-            "value": ["\"1276703231\"", "\"1276705620\""]
+            "value": [
+              "\"1276703231\"",
+              "\"1276705620\""
+            ]
           }
         }
       },
@@ -2890,11 +3007,16 @@
         "examples": {
           "strong-etag": {
             "summary": "Single ETag",
-            "value": ["\"1276705620\""]
+            "value": [
+              "\"1276705620\""
+            ]
           },
           "multiple-etags": {
             "summary": "Multiple ETags",
-            "value": ["\"1276703231\"", "\"1276705620\""]
+            "value": [
+              "\"1276703231\"",
+              "\"1276705620\""
+            ]
           }
         }
       },
@@ -2952,7 +3074,9 @@
                           "example": {
                             "afwiki": {
                               "title": "Douglas Adams",
-                              "badges": ["Q17437798"]
+                              "badges": [
+                                "Q17437798"
+                              ]
                             },
                             "arwiki": {
                               "title": "دوغلاس آدمز",
@@ -2988,7 +3112,9 @@
                       }
                     }
                   },
-                  "required": ["item"]
+                  "required": [
+                    "item"
+                  ]
                 },
                 {
                   "$ref": "#/components/schemas/EditSchema"
@@ -3066,7 +3192,9 @@
                       "example": "an example label"
                     }
                   },
-                  "required": ["label"]
+                  "required": [
+                    "label"
+                  ]
                 },
                 {
                   "$ref": "#/components/schemas/EditSchema"
@@ -3104,10 +3232,15 @@
                   "properties": {
                     "aliases": {
                       "type": "array",
-                      "example": ["alias-1", "alias-2"]
+                      "example": [
+                        "alias-1",
+                        "alias-2"
+                      ]
                     }
                   },
-                  "required": ["aliases"]
+                  "required": [
+                    "aliases"
+                  ]
                 },
                 {
                   "$ref": "#/components/schemas/EditSchema"
@@ -3148,7 +3281,9 @@
                       "example": "an example description"
                     }
                   },
-                  "required": ["description"]
+                  "required": [
+                    "description"
+                  ]
                 },
                 {
                   "$ref": "#/components/schemas/EditSchema"
@@ -3238,10 +3373,14 @@
                           }
                         }
                       },
-                      "required": ["title"]
+                      "required": [
+                        "title"
+                      ]
                     }
                   },
-                  "required": ["sitelink"]
+                  "required": [
+                    "sitelink"
+                  ]
                 },
                 {
                   "$ref": "#/components/schemas/EditSchema"
@@ -5588,13 +5727,17 @@
                   "properties": {
                     "sitelinks": {
                       "additionalProperties": {
-                        "required": ["title", "badges", "url"]
+                        "required": [
+                          "title",
+                          "badges",
+                          "url"
+                        ]
                       }
                     },
                     "statements": {
                       "additionalProperties": {
                         "items": {
-                          "$ref": "#/components/schemas/Statement2Schema"
+                          "$ref": "#/components/schemas/Statement"
                         }
                       }
                     }
@@ -5784,7 +5927,10 @@
               "items": {
                 "type": "string"
               },
-              "example": ["Douglas Noel Adams", "Douglas Noël Adams"]
+              "example": [
+                "Douglas Noel Adams",
+                "Douglas Noël Adams"
+              ]
             }
           }
         }
@@ -5832,7 +5978,7 @@
                     "statements": {
                       "additionalProperties": {
                         "items": {
-                          "$ref": "#/components/schemas/Statement2Schema"
+                          "$ref": "#/components/schemas/Statement"
                         }
                       }
                     }
@@ -6024,7 +6170,10 @@
               "items": {
                 "type": "string"
               },
-              "example": ["is a", "example of"]
+              "example": [
+                "is a",
+                "example of"
+              ]
             }
           }
         }
@@ -6637,8 +6786,13 @@
               },
               {
                 "example": {
-                  "en": ["Douglas Noel Adams", "Douglas Noël Adams"],
-                  "fr": ["Douglas Noel Adams"]
+                  "en": [
+                    "Douglas Noel Adams",
+                    "Douglas Noël Adams"
+                  ],
+                  "fr": [
+                    "Douglas Noel Adams"
+                  ]
                 }
               }
             ]
@@ -6651,7 +6805,9 @@
             "example": {
               "afwiki": {
                 "title": "Douglas Adams",
-                "badges": ["Q17437798"],
+                "badges": [
+                  "Q17437798"
+                ],
                 "url": "https://af.wikipedia.org/wiki/Douglas_Adams"
               },
               "arwiki": {
@@ -6738,8 +6894,13 @@
               },
               {
                 "example": {
-                  "en": ["is a", "is an"],
-                  "fr": ["est un"]
+                  "en": [
+                    "is a",
+                    "is an"
+                  ],
+                  "fr": [
+                    "est un"
+                  ]
                 }
               }
             ]
@@ -6802,8 +6963,14 @@
           }
         },
         "example": {
-          "en": ["en-alias1", "en-alias2"],
-          "fr": ["fr-alias1", "fr-alias2"]
+          "en": [
+            "en-alias1",
+            "en-alias2"
+          ],
+          "fr": [
+            "fr-alias1",
+            "fr-alias2"
+          ]
         }
       },
       "Sitelink": {
@@ -6842,7 +7009,11 @@
               "rank": {
                 "description": "The rank of the Statement",
                 "type": "string",
-                "enum": ["deprecated", "normal", "preferred"],
+                "enum": [
+                  "deprecated",
+                  "normal",
+                  "preferred"
+                ],
                 "default": "normal"
               }
             }
@@ -6901,7 +7072,11 @@
               "type": {
                 "description": "The value type",
                 "type": "string",
-                "enum": ["value", "somevalue", "novalue"]
+                "enum": [
+                  "value",
+                  "somevalue",
+                  "novalue"
+                ]
               }
             }
           }
