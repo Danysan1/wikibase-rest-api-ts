@@ -1,6 +1,6 @@
 {
   "name": "wikibase-rest-api-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Typescript model and API code for interacting with the REST API of a Wikibase instance (like Wikidata)",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

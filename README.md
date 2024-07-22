@@ -18,6 +18,7 @@ Depending on the tags of the method you want to use, initialize an object of the
 
 Suppose you want to get the label of [Wikidata item Q1](https://www.wikidata.org/wiki/Q1) in english.
 From [the OpenAPI specification](https://doc.wikimedia.org/Wikibase/master/js/rest-api/) you find out that the appropriate method is [`GET /entities/items/{item_id}/labels/{language_code}`](https://doc.wikimedia.org/Wikibase/master/js/rest-api/#/labels/getItemLabel), under the tag `labels` (=> **`LabelsApi`**).
+You don't need to specify which instance to use because Wikidata is the default.
 ```js
 import { LabelsApi } from "wikibase-rest-api-ts";
 const api = new LabelsApi();
@@ -28,8 +29,9 @@ api.getItemLabel({
     );
 ```
 
-Suppose instead you want to get the description for an entity on another Wikibase instance.
-From the specification you find the [`GET /entities/items/{item_id}/descriptions/{language_code}`](https://doc.wikimedia.org/Wikibase/master/js/rest-api/#/descriptions/getItemDescription) call under the tag `descriptions` (=> **`DescriptionsApi`**):
+#### Custom instance
+
+If instead of Wikidata you want to use another Wikibase instance you need to pass its REST API base URL while initializing the API:
 ```js
 import { Configuration, DescriptionsApi } from "wikibase-rest-api-ts";
 const api = new DescriptionsApi(new Configuration({
@@ -40,6 +42,25 @@ api.getItemDescription({
     }).then(
         desc => console.log(`English description for Q1 is ${desc}`)
     );
+```
+
+#### Authentication and write operations
+
+If you need to upload changes to the data you will need first to create an OAuth access token following the [instructions at this link](https://www.wikidata.org/wiki/Wikidata:REST_API/Authentication).
+Then you will need to pass the Authorization header for each call:
+```js
+import { Configuration, DescriptionsApi } from "wikibase-rest-api-ts";
+const api = new DescriptionsApi(new Configuration({
+        headers: Authorization: "Bearer " + YOUR_TOKEN
+    }));
+api.replaceItemDescription({
+        itemId: "Qxxx",
+        languageCode: "en",
+        replaceItemDescriptionRequest: {
+            description: "New description of the item",
+            comment: "Comment of your edit"
+        }
+    });
 ```
 
 ## Further info
