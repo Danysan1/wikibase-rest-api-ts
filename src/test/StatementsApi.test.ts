@@ -1,75 +1,89 @@
-import { Q1_P31_ID, Q1_P31_VALUE, P31_P31_ID, P31_P31_VALUE } from "./constants";
-import { StatementsApi } from "../../dist";
+import { ENTITY, ENTITY_INSTANCE_ID, ENTITY_INSTANCE_VALUE, INSTANCE_PROPERTY, PROPERTY_INSTANCE_ID, PROPERTY_INSTANCE_VALUE, PROPERTY, API_BASE_PATH, BEARER_TOKEN } from "./constants";
+import { Configuration, StatementsApi } from "../../dist";
 // import { StatementsApi } from "wikibase-rest-api-ts";
 
-const api = new StatementsApi();
+const api = new StatementsApi(new Configuration({
+    basePath: API_BASE_PATH,
+    headers: BEARER_TOKEN ? { Authorization: "Bearer " + BEARER_TOKEN } : undefined
+}));
 
-test("getItemStatement", async () => {
-    const stat = await api.getItemStatement({
-        itemId: "Q1", statementId: Q1_P31_ID
+describe("Item statements", () => {
+    test("getItemStatement", async () => {
+        const stat = await api.getItemStatement({
+            itemId: ENTITY, statementId: ENTITY_INSTANCE_ID
+        });
+        expect(stat).toBeTruthy();
+        expect(typeof stat).toMatch("object");
+        expect(stat.id).toMatch(ENTITY_INSTANCE_ID);
+        expect(stat.property?.id).toMatch(INSTANCE_PROPERTY);
+        expect(stat.value?.content).toMatch(ENTITY_INSTANCE_VALUE);
     });
-    expect(stat).toBeTruthy();
-    expect(typeof stat).toMatch("object");
-    expect(stat.id).toMatch(Q1_P31_ID);
-    expect(stat.property?.id).toMatch("P31");
-    expect(stat.value?.content).toMatch(Q1_P31_VALUE);
-});
 
-test("getItemStatements", async () => {
-    const stats = await api.getItemStatements({ itemId: "Q1" });
-    expect(stats).toBeTruthy();
-    expect(typeof stats).toMatch("object");
+    test("getItemStatements", async () => {
+        const stats = await api.getItemStatements({ itemId: ENTITY });
+        expect(stats).toBeTruthy();
+        expect(typeof stats).toMatch("object");
 
-    expect(stats["P31"]).toBeTruthy();
-    const stat = stats["P31"].find(s => s.id === Q1_P31_ID);
+        expect(Object.keys(stats)).toContain(INSTANCE_PROPERTY);
+        expect(stats[INSTANCE_PROPERTY]).toBeTruthy();
+        const stat = stats[INSTANCE_PROPERTY].find(s => s.id === ENTITY_INSTANCE_ID);
 
-    expect(stat).toBeTruthy();
-    expect(stat?.property?.id).toMatch("P31");
-    expect(stat?.value?.content).toMatch(Q1_P31_VALUE);
-});
-
-test("getItemStatements with property", async () => {
-    const stats = await api.getItemStatements({ itemId: "Q1", property: "P31" });
-    expect(stats).toBeTruthy();
-    expect(typeof stats).toMatch("object");
-
-    expect(stats["P31"]).toBeTruthy();
-    const stat = stats["P31"].find(s => s.id === Q1_P31_ID);
-
-    expect(stat).toBeTruthy();
-    expect(stat?.property?.id).toMatch("P31");
-    expect(stat?.value?.content).toMatch(Q1_P31_VALUE);
-});
-
-test("getPropertyStatement", async () => {
-    const stat = await api.getPropertyStatement({
-        propertyId: "P31", statementId: P31_P31_ID
+        expect(stat).toBeTruthy();
+        expect(stat?.property?.id).toMatch(INSTANCE_PROPERTY);
+        expect(stat?.value?.content).toMatch(ENTITY_INSTANCE_VALUE);
     });
-    expect(stat).toBeTruthy();
-    expect(typeof stat).toMatch("object");
-    expect(stat.id).toMatch(P31_P31_ID);
-    expect(stat.property?.id).toMatch("P31");
-    expect(stat.value?.content).toMatch(P31_P31_VALUE);
+
+    test("getItemStatements with property", async () => {
+        const stats = await api.getItemStatements({
+            itemId: ENTITY, property: INSTANCE_PROPERTY
+        });
+        expect(stats).toBeTruthy();
+        expect(typeof stats).toMatch("object");
+
+        expect(Object.keys(stats)).toContain(INSTANCE_PROPERTY);
+        expect(stats[INSTANCE_PROPERTY]).toBeTruthy();
+        const stat = stats[INSTANCE_PROPERTY].find(s => s.id === ENTITY_INSTANCE_ID);
+
+        expect(stat).toBeTruthy();
+        expect(stat?.property?.id).toMatch(INSTANCE_PROPERTY);
+        expect(stat?.value?.content).toMatch(ENTITY_INSTANCE_VALUE);
+    });
 });
 
-test("getPropertyStatements", async () => {
-    const stats = await api.getPropertyStatements({ propertyId: "P31" });
-    expect(stats).toBeTruthy();
-    expect(typeof stats).toMatch("object");
+describe("Property statements", () => {
+    test("getPropertyStatement", async () => {
+        const stat = await api.getPropertyStatement({
+            propertyId: PROPERTY, statementId: PROPERTY_INSTANCE_ID
+        });
+        expect(stat).toBeTruthy();
+        expect(typeof stat).toMatch("object");
+        expect(stat.id).toMatch(PROPERTY_INSTANCE_ID);
+        expect(stat.property?.id).toMatch(INSTANCE_PROPERTY);
+        expect(stat.value?.content).toMatch(PROPERTY_INSTANCE_VALUE);
+    });
 
-    expect(stats["P31"]).toBeTruthy();
-    const stat = stats["P31"].find(s => s.id === P31_P31_ID);
+    test("getPropertyStatements", async () => {
+        const stats = await api.getPropertyStatements({
+            propertyId: PROPERTY
+        });
+        expect(stats).toBeTruthy();
+        expect(typeof stats).toMatch("object");
 
-    expect(stat).toBeTruthy();
-    expect(stat?.property?.id).toMatch("P31");
-    expect(stat?.value?.content).toMatch(P31_P31_VALUE);
-});
+        expect(Object.keys(stats)).toContain(INSTANCE_PROPERTY);
+        expect(stats[INSTANCE_PROPERTY]).toBeTruthy();
+        const stat = stats[INSTANCE_PROPERTY].find(s => s.id === PROPERTY_INSTANCE_ID);
 
-test("getStatement", async () => {
-    const stat = await api.getStatement({ statementId: Q1_P31_ID });
-    expect(stat).toBeTruthy();
-    expect(typeof stat).toMatch("object");
-    expect(stat.id).toMatch(Q1_P31_ID);
-    expect(stat.property?.id).toMatch("P31");
-    expect(stat.value?.content).toMatch(Q1_P31_VALUE);
+        expect(stat).toBeTruthy();
+        expect(stat?.property?.id).toMatch(INSTANCE_PROPERTY);
+        expect(stat?.value?.content).toMatch(PROPERTY_INSTANCE_VALUE);
+    });
+
+    test("getStatement", async () => {
+        const stat = await api.getStatement({ statementId: ENTITY_INSTANCE_ID });
+        expect(stat).toBeTruthy();
+        expect(typeof stat).toMatch("object");
+        expect(stat.id).toMatch(ENTITY_INSTANCE_ID);
+        expect(stat.property?.id).toMatch(INSTANCE_PROPERTY);
+        expect(stat.value?.content).toMatch(ENTITY_INSTANCE_VALUE);
+    });
 });

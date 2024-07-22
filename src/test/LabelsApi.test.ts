@@ -1,30 +1,66 @@
-import { LabelsApi } from "../../dist";
+import { API_BASE_PATH, BEARER_TOKEN, ENTITY, ENTITY_DESCRIPTION, ENTITY_LABEL, PROPERTY, PROPERTY_LABEL } from "./constants";
+import { Configuration, LabelsApi, ResponseError } from "../../dist";
 // import { LabelsApi } from "wikibase-rest-api-ts";
 
-const api = new LabelsApi();
+const api = new LabelsApi(new Configuration({
+    basePath: API_BASE_PATH,
+    headers: BEARER_TOKEN ? { Authorization: "Bearer " + BEARER_TOKEN } : undefined
+}));
 
-test("getItemDescription", async () => {
-    const descr = await api.getItemLabel({ itemId: "Q1", languageCode: "en" });
-    expect(descr).toBeTruthy();
-    expect(descr).toMatch(/universe/i);
+describe("Item labels write", () => {
+    if (!BEARER_TOKEN) {
+        test.skip("replaceItemLabel", () => { });
+    } else {
+        test("replaceItemLabel", async () => {
+            try {
+                const label1 = await api.replaceItemLabel({
+                    itemId: ENTITY,
+                    languageCode: "en",
+                    replaceItemLabelRequest: {
+                        label: ENTITY_LABEL,
+                        comment: "test replaceItemLabel"
+                    }
+                });
+                expect(label1).toBeTruthy();
+                expect(label1).toMatch(ENTITY_LABEL);
+            } catch (e) {
+                if (e instanceof ResponseError) {
+                    console.error("replaceItemLabel error", e, await e.response.text());
+                }
+                throw e;
+            }
+        });
+    }
 });
 
-test("getItemDescriptions", async () => {
-    const descrs = await api.getItemLabels({ itemId: "Q1" });
-    expect(descrs).toBeTruthy();
-    expect(typeof descrs).toMatch("object");
-    expect(descrs.en).toMatch(/universe/i);
+describe("Item labels read", () => {
+    test("getItemLabel", async () => {
+        const label = await api.getItemLabel({ itemId: ENTITY, languageCode: "en" });
+        expect(label).toBeTruthy();
+        expect(label).toMatch(ENTITY_LABEL);
+    });
+
+    test("getItemLabels", async () => {
+        const labels = await api.getItemLabels({ itemId: ENTITY });
+        expect(labels).toBeTruthy();
+        expect(typeof labels).toMatch("object");
+        expect(Object.keys(labels)).toContain("en");
+        expect(labels.en).toMatch(ENTITY_LABEL);
+    });
 });
 
-test("getPropertyDescription", async () => {
-    const descr = await api.getPropertyLabel({ propertyId: "P31", languageCode: "en" });
-    expect(descr).toBeTruthy();
-    expect(descr).toMatch(/instance/i);
-});
+describe("Property labels read", () => {
+    test("getPropertyLabel", async () => {
+        const label = await api.getPropertyLabel({ propertyId: PROPERTY, languageCode: "en" });
+        expect(label).toBeTruthy();
+        expect(label).toMatch(PROPERTY_LABEL);
+    });
 
-test("getPropertyDescriptions", async () => {
-    const descrs = await api.getPropertyLabels({ propertyId: "P31" });
-    expect(descrs).toBeTruthy();
-    expect(typeof descrs).toMatch("object");
-    expect(descrs.en).toMatch(/instance/i);
+    test("getPropertyLabels", async () => {
+        const labels = await api.getPropertyLabels({ propertyId: PROPERTY });
+        expect(labels).toBeTruthy();
+        expect(typeof labels).toMatch("object");
+        expect(Object.keys(labels)).toContain("en");
+        expect(labels.en).toMatch(PROPERTY_LABEL);
+    });
 });

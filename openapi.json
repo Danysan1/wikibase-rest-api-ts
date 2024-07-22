@@ -7938,7 +7938,11 @@
   "servers": [
     {
       "url": "https://www.wikidata.org/w/rest.php/wikibase/v0",
-      "description": "Wikidata REST API"
+      "description": "Wikidata"
+    },
+    {
+      "url": "https://test.wikidata.org/w/rest.php/wikibase/v0",
+      "description": "Wikidata TEST INSTANCE"
     }
   ]
 }
