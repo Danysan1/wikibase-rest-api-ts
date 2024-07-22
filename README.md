@@ -51,7 +51,7 @@ Then you will need to pass the Authorization header for each call:
 ```js
 import { Configuration, DescriptionsApi } from "wikibase-rest-api-ts";
 const api = new DescriptionsApi(new Configuration({
-        headers: Authorization: "Bearer " + YOUR_TOKEN
+        headers: { Authorization: "Bearer " + YOUR_TOKEN }
     }));
 api.replaceItemDescription({
         itemId: "Qxxx",
