@@ -4,4 +4,5 @@ module.exports = {
   testEnvironment: "node",
   rootDir: "./src/",
   verbose: true,
+  setupFiles: ["dotenv/config"],
 };

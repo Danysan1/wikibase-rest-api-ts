@@ -1,5 +1,4 @@
-export const API_BASE_PATH = "https://test.wikidata.org/w/rest.php/wikibase/v0",
-    BEARER_TOKEN = process.env.WB_BEARER_TOKEN, // <-- Pass a bearer token to run all tests
+export const API_BASE_PATH = "https://test.wikidata.org/w/rest.php/wikibase",
     INSTANCE_PROPERTY = "P82";
 
 // https://test.wikidata.org/wiki/Q235103#Q235103$b88c2bef-4d9f-4a77-c857-5d201d828ff1

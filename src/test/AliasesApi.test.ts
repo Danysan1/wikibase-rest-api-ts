@@ -1,21 +1,21 @@
-import { API_BASE_PATH, BEARER_TOKEN, ENTITY, ENTITY_ALIAS, PROPERTY, PROPERTY_ALIAS } from "./constants";
+import { API_BASE_PATH, ENTITY, ENTITY_ALIAS, PROPERTY, PROPERTY_ALIAS } from "./constants";
 import { Configuration, AliasesApi, ResponseError } from "../../dist";
 // import { AliasesApi } from "wikibase-rest-api-ts";
 
 const api = new AliasesApi(new Configuration({
     basePath: API_BASE_PATH,
-    headers: BEARER_TOKEN ? { Authorization: "Bearer " + BEARER_TOKEN } : undefined
+    headers: process.env.WB_BEARER_TOKEN ? { Authorization: "Bearer " + process.env.WB_BEARER_TOKEN } : undefined
 }));
 
 describe("Item aliases write", () => {
-    if (!BEARER_TOKEN) {
+    if (!process.env.WB_BEARER_TOKEN) {
         test.skip("patchItemAliases + addItemAliasesInLanguage", () => { });
     } else {
         test("patchItemAliases + addItemAliasesInLanguage", async () => {
             try {
                 const aliases0 = await api.patchItemAliases({
                     itemId: ENTITY,
-                    aliasesPatchSchema: {
+                    patchItemRequest: {
                         patch: [{
                             "op": "remove",
                             "path": "/en/0",

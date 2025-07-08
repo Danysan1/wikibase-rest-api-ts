@@ -1,14 +1,14 @@
-import { API_BASE_PATH, BEARER_TOKEN, ENTITY, ENTITY_DESCRIPTION, ENTITY_LABEL, PROPERTY, PROPERTY_LABEL } from "./constants";
+import { API_BASE_PATH, ENTITY, ENTITY_LABEL, PROPERTY, PROPERTY_LABEL } from "./constants";
 import { Configuration, LabelsApi, ResponseError } from "../../dist";
 // import { LabelsApi } from "wikibase-rest-api-ts";
 
 const api = new LabelsApi(new Configuration({
     basePath: API_BASE_PATH,
-    headers: BEARER_TOKEN ? { Authorization: "Bearer " + BEARER_TOKEN } : undefined
+    headers: process.env.WB_BEARER_TOKEN ? { Authorization: "Bearer " + process.env.WB_BEARER_TOKEN } : undefined
 }));
 
 describe("Item labels write", () => {
-    if (!BEARER_TOKEN) {
+    if (!process.env.WB_BEARER_TOKEN) {
         test.skip("replaceItemLabel", () => { });
     } else {
         test("replaceItemLabel", async () => {

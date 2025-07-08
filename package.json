@@ -1,6 +1,6 @@
 {
   "name": "wikibase-rest-api-ts",
-  "version": "1.0.4",
+  "version": "1.2.1",
   "description": "Typescript model and API code for interacting with the REST API of a Wikibase instance (like Wikidata)",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -13,13 +13,12 @@
     "generate": "openapi-generator-cli generate",
     "clean": "rm -rf ./src/generated ./dist",
     "clean:windows": "rmdir /s /q src\\generated dist",
-    "fix": "sh fix.sh",
     "build": "tsup",
     "list-versions": "openapi-generator-cli version-manager list"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/openetymologymap/wikibase-rest-api-ts.git"
+    "url": "git+https://github.com/Danysan1/wikibase-rest-api-ts.git"
   },
   "keywords": [
     "wikibase",
@@ -39,12 +38,13 @@
   },
   "license": "LGPL-3.0-or-later",
   "bugs": {
-    "url": "https://gitlab.com/openetymologymap/wikibase-rest-api-ts/issues"
+    "url": "https://github.com/Danysan1/wikibase-rest-api-ts/issues"
   },
-  "homepage": "https://gitlab.com/openetymologymap/wikibase-rest-api-ts#readme",
+  "homepage": "https://github.com/Danysan1/wikibase-rest-api-ts",
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.4",
     "@types/jest": "^29.5.12",
+    "dotenv": "^17.1.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.3",
     "ts-node": "^10.9.2",

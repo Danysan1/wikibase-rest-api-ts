@@ -35,7 +35,7 @@ If instead of Wikidata you want to use another Wikibase instance you need to pas
 ```js
 import { Configuration, DescriptionsApi } from "wikibase-rest-api-ts";
 const api = new DescriptionsApi(new Configuration({
-        basePath: "https://url-to-my-wikibase-instance/w/rest.php/wikibase/v0",
+        basePath: "https://url-to-my-wikibase-instance/w/rest.php/wikibase",
     }));
 api.getItemDescription({
         itemId: "Q1", languageCode: "en"
@@ -65,4 +65,4 @@ api.replaceItemDescription({
 
 ## Further info
 
-For further info and to contribute, see [CONTRIBUTING.md](https://gitlab.com/openetymologymap/wikibase-rest-api-ts/-/blob/main/CONTRIBUTING.md).
+For further info and to contribute, see [CONTRIBUTING.md](./CONTRIBUTING.md).

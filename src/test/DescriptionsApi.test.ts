@@ -1,14 +1,14 @@
-import { API_BASE_PATH, BEARER_TOKEN, ENTITY, ENTITY_DESCRIPTION, PROPERTY, PROPERTY_DESCRIPTION } from "./constants";
+import { API_BASE_PATH, ENTITY, ENTITY_DESCRIPTION, PROPERTY, PROPERTY_DESCRIPTION } from "./constants";
 import { Configuration, DescriptionsApi, ResponseError } from "../../dist";
 // import { DescriptionsApi } from "wikibase-rest-api-ts";
 
 const api = new DescriptionsApi(new Configuration({
     basePath: API_BASE_PATH,
-    headers: BEARER_TOKEN ? { Authorization: "Bearer " + BEARER_TOKEN } : undefined
+    headers: process.env.WB_BEARER_TOKEN ? { Authorization: "Bearer " + process.env.WB_BEARER_TOKEN } : undefined
 }));
 
 describe("Item description write", () => {
-    if (!BEARER_TOKEN) {
+    if (!process.env.WB_BEARER_TOKEN) {
         test.skip("replaceItemDescription", () => { });
     } else {
         test("replaceItemDescription", async () => {
