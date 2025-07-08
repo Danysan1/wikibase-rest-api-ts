@@ -12,22 +12,40 @@ describe("Item aliases write", () => {
         test.skip("patchItemAliases + addItemAliasesInLanguage", () => { });
     } else {
         test("patchItemAliases + addItemAliasesInLanguage", async () => {
+            let aliasStartingCount;
             try {
-                const aliases0 = await api.patchItemAliases({
-                    itemId: ENTITY,
-                    patchItemRequest: {
-                        patch: [{
-                            "op": "remove",
-                            "path": "/en/0",
-                        }],
-                        comment: "test patchItemAliases"
-                    }
-                });
-                expect(typeof aliases0).toMatch("object");
-                expect(aliases0.en ?? []).not.toContain(ENTITY_ALIAS);
+                const aliases = await api.getItemAliasesInLanguage({ itemId: ENTITY, languageCode: "en" });
+                expect(aliases).toBeTruthy();
+                expect(Array.isArray(aliases)).toBeTruthy();
+                aliasStartingCount = aliases.length;
             } catch (e) {
                 if (e instanceof ResponseError) {
-                    console.error("patchItemAliases error", e, await e.response.text());
+                    console.error("getItemAliasesInLanguage error:", await e.response.text(), e);
+                }
+                throw e;
+            }
+
+            if (!aliasStartingCount) {
+                throw new Error("No aliases available in english on test entity:" + ENTITY);
+            } else {
+                try {
+                    const aliases0 = await api.patchItemAliases({
+                        itemId: ENTITY,
+                        patchItemRequest: {
+                            patch: [{
+                                op: "remove",
+                                path: "/en",
+                            }],
+                            comment: "test patchItemAliases"
+                        }
+                    });
+                    expect(typeof aliases0).toMatch("object");
+                    expect(aliases0.en ?? []).not.toContain(ENTITY_ALIAS);
+                } catch (e) {
+                    if (e instanceof ResponseError) {
+                        console.error("patchItemAliases error:", await e.response.text(), e);
+                    }
+                    throw e;
                 }
             }
 
@@ -45,7 +63,7 @@ describe("Item aliases write", () => {
                 expect(aliases1).toContain(ENTITY_ALIAS);
             } catch (e) {
                 if (e instanceof ResponseError) {
-                    console.error("addItemAliasesInLanguage error", e, await e.response.text());
+                    console.error("addItemAliasesInLanguage error:", await e.response.text(), e);
                 }
                 throw e;
             }

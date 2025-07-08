@@ -16,19 +16,19 @@
 import * as runtime from '../runtime';
 import type {
   AddItem400Response,
-  AddProperty201Response,
   AddPropertyRequest,
   PatchItemRequest,
+  Property,
 } from '../models/index';
 import {
     AddItem400ResponseFromJSON,
     AddItem400ResponseToJSON,
-    AddProperty201ResponseFromJSON,
-    AddProperty201ResponseToJSON,
     AddPropertyRequestFromJSON,
     AddPropertyRequestToJSON,
     PatchItemRequestFromJSON,
     PatchItemRequestToJSON,
+    PropertyFromJSON,
+    PropertyToJSON,
 } from '../models/index';
 
 export interface AddPropertyOperationRequest {
@@ -62,7 +62,7 @@ export class PropertiesApi extends runtime.BaseAPI {
     /**
      * Create a Wikibase Property
      */
-    async addPropertyRaw(requestParameters: AddPropertyOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddProperty201Response>> {
+    async addPropertyRaw(requestParameters: AddPropertyOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters['addPropertyRequest'] == null) {
             throw new runtime.RequiredError(
                 'addPropertyRequest',
@@ -88,13 +88,13 @@ export class PropertiesApi extends runtime.BaseAPI {
             body: AddPropertyRequestToJSON(requestParameters['addPropertyRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddProperty201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
 
     /**
      * Create a Wikibase Property
      */
-    async addProperty(requestParameters: AddPropertyOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddProperty201Response> {
+    async addProperty(requestParameters: AddPropertyOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Property> {
         const response = await this.addPropertyRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -102,7 +102,7 @@ export class PropertiesApi extends runtime.BaseAPI {
     /**
      * Retrieve a single Wikibase Property by ID
      */
-    async getPropertyRaw(requestParameters: GetPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddProperty201Response>> {
+    async getPropertyRaw(requestParameters: GetPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters['propertyId'] == null) {
             throw new runtime.RequiredError(
                 'propertyId',
@@ -145,13 +145,13 @@ export class PropertiesApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddProperty201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
 
     /**
      * Retrieve a single Wikibase Property by ID
      */
-    async getProperty(requestParameters: GetPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddProperty201Response> {
+    async getProperty(requestParameters: GetPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Property> {
         const response = await this.getPropertyRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -159,7 +159,7 @@ export class PropertiesApi extends runtime.BaseAPI {
     /**
      * Change a single Wikibase Property by ID
      */
-    async patchPropertyRaw(requestParameters: PatchPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddProperty201Response>> {
+    async patchPropertyRaw(requestParameters: PatchPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Property>> {
         if (requestParameters['propertyId'] == null) {
             throw new runtime.RequiredError(
                 'propertyId',
@@ -200,13 +200,13 @@ export class PropertiesApi extends runtime.BaseAPI {
             body: PatchItemRequestToJSON(requestParameters['patchItemRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddProperty201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PropertyFromJSON(jsonValue));
     }
 
     /**
      * Change a single Wikibase Property by ID
      */
-    async patchProperty(requestParameters: PatchPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddProperty201Response> {
+    async patchProperty(requestParameters: PatchPropertyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Property> {
         const response = await this.patchPropertyRaw(requestParameters, initOverrides);
         return await response.value();
     }

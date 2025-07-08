@@ -7,36 +7,38 @@ const api = new ItemsApi(new Configuration({
     headers: process.env.WB_BEARER_TOKEN ? { Authorization: "Bearer " + process.env.WB_BEARER_TOKEN } : undefined
 }));
 
-test("getItem", async () => {
-    const item = await api.getItem({ itemId: ENTITY });
+describe("Item read", () => {
+    test("getItem", async () => {
+        const item = await api.getItem({ itemId: ENTITY });
 
-    expect(item).toBeTruthy();
-    expect(typeof item).toMatch("object");
-    expect(item.id).toMatch(ENTITY);
-    expect(item.labels?.en).toMatch(ENTITY_LABEL);
-    expect(item.descriptions?.en).toMatch(ENTITY_DESCRIPTION);
-    expect(item.aliases?.en).toContain(ENTITY_ALIAS);
-    expect(item.statements).toBeTruthy();
-    expect(Object.keys(item.statements || {})).toContain(INSTANCE_PROPERTY);
+        expect(item).toBeTruthy();
+        expect(typeof item).toMatch("object");
+        expect(item.id).toMatch(ENTITY);
+        expect(item.labels?.en).toMatch(ENTITY_LABEL);
+        expect(item.descriptions?.en).toMatch(ENTITY_DESCRIPTION);
+        expect(item.aliases?.en).toContain(ENTITY_ALIAS);
+        expect(item.statements).toBeTruthy();
+        expect(Object.keys(item.statements || {})).toContain(INSTANCE_PROPERTY);
 
-    const stats = item.statements?.[INSTANCE_PROPERTY];
-    expect(stats).toBeTruthy();
-    expect(Array.isArray(stats)).toBeTruthy();
+        const stats = item.statements?.[INSTANCE_PROPERTY];
+        expect(stats).toBeTruthy();
+        expect(Array.isArray(stats)).toBeTruthy();
 
-    const stat = stats?.find(s => s.id === ENTITY_INSTANCE_ID);
-    expect(stat).toBeTruthy();
-    expect(stat?.property?.id).toMatch(INSTANCE_PROPERTY);
-    expect(stat?.value?.content).toMatch(ENTITY_INSTANCE_VALUE);
-});
+        const stat = stats?.find(s => s.id === ENTITY_INSTANCE_ID);
+        expect(stat).toBeTruthy();
+        expect(stat?.property?.id).toMatch(INSTANCE_PROPERTY);
+        expect(stat?.value?.content).toMatch(ENTITY_INSTANCE_VALUE);
+    });
 
-test("getItem with fields", async () => {
-    const item = await api.getItem({ itemId: ENTITY, fields: ["labels"] });
+    test("getItem with fields", async () => {
+        const item = await api.getItem({ itemId: ENTITY, fields: ["labels"] });
 
-    expect(item).toBeTruthy();
-    expect(typeof item).toMatch("object");
-    expect(item.id).toMatch(ENTITY);
-    expect(item.labels?.en).toMatch(ENTITY_LABEL);
-    expect(item.descriptions).toBeFalsy();
-    expect(item.aliases).toBeFalsy();
-    expect(item.statements).toBeFalsy();
+        expect(item).toBeTruthy();
+        expect(typeof item).toMatch("object");
+        expect(item.id).toMatch(ENTITY);
+        expect(item.labels?.en).toMatch(ENTITY_LABEL);
+        expect(item.descriptions).toBeFalsy();
+        expect(item.aliases).toBeFalsy();
+        expect(item.statements).toBeFalsy();
+    });
 });

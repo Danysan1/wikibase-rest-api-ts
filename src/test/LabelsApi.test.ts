@@ -25,7 +25,7 @@ describe("Item labels write", () => {
                 expect(label1).toMatch(ENTITY_LABEL);
             } catch (e) {
                 if (e instanceof ResponseError) {
-                    console.error("replaceItemLabel error", e, await e.response.text());
+                    console.error("replaceItemLabel error:", await e.response.text(), e);
                 }
                 throw e;
             }

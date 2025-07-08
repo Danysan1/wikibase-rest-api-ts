@@ -20,6 +20,7 @@ import type {
   DeleteSitelinkRequest,
   PatchItemRequest,
   SetSitelinkRequest,
+  Sitelink,
 } from '../models/index';
 import {
     AddItem400ResponseFromJSON,
@@ -32,6 +33,8 @@ import {
     PatchItemRequestToJSON,
     SetSitelinkRequestFromJSON,
     SetSitelinkRequestToJSON,
+    SitelinkFromJSON,
+    SitelinkToJSON,
 } from '../models/index';
 
 export interface DeleteSitelinkOperationRequest {
@@ -158,7 +161,7 @@ export class SitelinksApi extends runtime.BaseAPI {
     /**
      * Retrieve an Item\'s Sitelink
      */
-    async getSitelinkRaw(requestParameters: GetSitelinkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemRequestAllOfItemSitelinksValue>> {
+    async getSitelinkRaw(requestParameters: GetSitelinkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Sitelink>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -204,13 +207,13 @@ export class SitelinksApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemRequestAllOfItemSitelinksValueFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SitelinkFromJSON(jsonValue));
     }
 
     /**
      * Retrieve an Item\'s Sitelink
      */
-    async getSitelink(requestParameters: GetSitelinkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemRequestAllOfItemSitelinksValue> {
+    async getSitelink(requestParameters: GetSitelinkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Sitelink> {
         const response = await this.getSitelinkRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -218,7 +221,7 @@ export class SitelinksApi extends runtime.BaseAPI {
     /**
      * Retrieve an Item\'s Sitelinks
      */
-    async getSitelinksRaw(requestParameters: GetSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: AddItemRequestAllOfItemSitelinksValue; }>> {
+    async getSitelinksRaw(requestParameters: GetSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: object; }>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -257,13 +260,13 @@ export class SitelinksApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => runtime.mapValues(jsonValue, AddItemRequestAllOfItemSitelinksValueFromJSON));
+        return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
      * Retrieve an Item\'s Sitelinks
      */
-    async getSitelinks(requestParameters: GetSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: AddItemRequestAllOfItemSitelinksValue; }> {
+    async getSitelinks(requestParameters: GetSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: object; }> {
         const response = await this.getSitelinksRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -271,7 +274,7 @@ export class SitelinksApi extends runtime.BaseAPI {
     /**
      * Change an Item\'s Sitelinks
      */
-    async patchSitelinksRaw(requestParameters: PatchSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: AddItemRequestAllOfItemSitelinksValue; }>> {
+    async patchSitelinksRaw(requestParameters: PatchSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: object; }>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -312,13 +315,13 @@ export class SitelinksApi extends runtime.BaseAPI {
             body: PatchItemRequestToJSON(requestParameters['patchItemRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => runtime.mapValues(jsonValue, AddItemRequestAllOfItemSitelinksValueFromJSON));
+        return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
      * Change an Item\'s Sitelinks
      */
-    async patchSitelinks(requestParameters: PatchSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: AddItemRequestAllOfItemSitelinksValue; }> {
+    async patchSitelinks(requestParameters: PatchSitelinksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: object; }> {
         const response = await this.patchSitelinksRaw(requestParameters, initOverrides);
         return await response.value();
     }

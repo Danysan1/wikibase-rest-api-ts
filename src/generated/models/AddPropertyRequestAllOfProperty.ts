@@ -13,12 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
-import type { AddItemRequestAllOfItemStatementsValueInner } from './AddItemRequestAllOfItemStatementsValueInner';
+import type { Statement } from './Statement';
 import {
-    AddItemRequestAllOfItemStatementsValueInnerFromJSON,
-    AddItemRequestAllOfItemStatementsValueInnerFromJSONTyped,
-    AddItemRequestAllOfItemStatementsValueInnerToJSON,
-} from './AddItemRequestAllOfItemStatementsValueInner';
+    StatementFromJSON,
+    StatementFromJSONTyped,
+    StatementToJSON,
+} from './Statement';
 
 /**
  * 
@@ -64,10 +64,10 @@ export interface AddPropertyRequestAllOfProperty {
     aliases?: { [key: string]: Array<string>; };
     /**
      * 
-     * @type {{ [key: string]: Array<AddItemRequestAllOfItemStatementsValueInner>; }}
+     * @type {{ [key: string]: Array<Statement>; }}
      * @memberof AddPropertyRequestAllOfProperty
      */
-    statements?: { [key: string]: Array<AddItemRequestAllOfItemStatementsValueInner>; };
+    statements?: { [key: string]: Array<Statement>; };
 }
 
 /**

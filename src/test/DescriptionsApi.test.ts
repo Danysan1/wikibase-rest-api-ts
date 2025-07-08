@@ -25,7 +25,7 @@ describe("Item description write", () => {
                 expect(descr).toMatch(ENTITY_DESCRIPTION);
             } catch (e) {
                 if (e instanceof ResponseError) {
-                    console.error("replaceItemDescription error", e, await e.response.text());
+                    console.error("replaceItemDescription error:", await e.response.text(), e);
                 }
                 throw e;
             }

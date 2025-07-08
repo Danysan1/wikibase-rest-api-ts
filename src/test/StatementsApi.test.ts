@@ -1,10 +1,10 @@
-import { ENTITY, ENTITY_INSTANCE_ID, ENTITY_INSTANCE_VALUE, INSTANCE_PROPERTY, PROPERTY_INSTANCE_ID, PROPERTY_INSTANCE_VALUE, PROPERTY, API_BASE_PATH, BEARER_TOKEN } from "./constants";
+import { ENTITY, ENTITY_INSTANCE_ID, ENTITY_INSTANCE_VALUE, INSTANCE_PROPERTY, PROPERTY_INSTANCE_ID, PROPERTY_INSTANCE_VALUE, PROPERTY, API_BASE_PATH } from "./constants";
 import { Configuration, StatementsApi } from "../../dist";
 // import { StatementsApi } from "wikibase-rest-api-ts";
 
 const api = new StatementsApi(new Configuration({
     basePath: API_BASE_PATH,
-    headers: BEARER_TOKEN ? { Authorization: "Bearer " + BEARER_TOKEN } : undefined
+    headers: process.env.WB_BEARER_TOKEN ? { Authorization: "Bearer " + process.env.WB_BEARER_TOKEN } : undefined
 }));
 
 describe("Item statements", () => {

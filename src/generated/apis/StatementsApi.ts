@@ -16,25 +16,25 @@
 import * as runtime from '../runtime';
 import type {
   AddItem400Response,
-  AddItemStatement201Response,
   AddItemStatementRequest,
   DeleteSitelinkRequest,
-  GetItemStatements200ResponseValueInner,
   PatchItemRequest,
+  ReplaceItemStatementRequest,
+  Statement,
 } from '../models/index';
 import {
     AddItem400ResponseFromJSON,
     AddItem400ResponseToJSON,
-    AddItemStatement201ResponseFromJSON,
-    AddItemStatement201ResponseToJSON,
     AddItemStatementRequestFromJSON,
     AddItemStatementRequestToJSON,
     DeleteSitelinkRequestFromJSON,
     DeleteSitelinkRequestToJSON,
-    GetItemStatements200ResponseValueInnerFromJSON,
-    GetItemStatements200ResponseValueInnerToJSON,
     PatchItemRequestFromJSON,
     PatchItemRequestToJSON,
+    ReplaceItemStatementRequestFromJSON,
+    ReplaceItemStatementRequestToJSON,
+    StatementFromJSON,
+    StatementToJSON,
 } from '../models/index';
 
 export interface AddItemStatementOperationRequest {
@@ -47,7 +47,7 @@ export interface AddItemStatementOperationRequest {
 
 export interface AddPropertyStatementRequest {
     propertyId: string;
-    addItemStatementRequest: AddItemStatementRequest;
+    replaceItemStatementRequest: ReplaceItemStatementRequest;
     ifMatch?: Array<string>;
     ifUnmodifiedSince?: string;
     ifNoneMatch?: Array<string>;
@@ -154,10 +154,10 @@ export interface PatchStatementRequest {
     ifUnmodifiedSince?: string;
 }
 
-export interface ReplaceItemStatementRequest {
+export interface ReplaceItemStatementOperationRequest {
     itemId: string;
     statementId: string;
-    addItemStatementRequest: AddItemStatementRequest;
+    replaceItemStatementRequest: ReplaceItemStatementRequest;
     ifMatch?: Array<string>;
     ifNoneMatch?: Array<string>;
     ifUnmodifiedSince?: string;
@@ -166,7 +166,7 @@ export interface ReplaceItemStatementRequest {
 export interface ReplacePropertyStatementRequest {
     propertyId: string;
     statementId: string;
-    addItemStatementRequest: AddItemStatementRequest;
+    replaceItemStatementRequest: ReplaceItemStatementRequest;
     ifMatch?: Array<string>;
     ifNoneMatch?: Array<string>;
     ifUnmodifiedSince?: string;
@@ -174,7 +174,7 @@ export interface ReplacePropertyStatementRequest {
 
 export interface ReplaceStatementRequest {
     statementId: string;
-    addItemStatementRequest: AddItemStatementRequest;
+    replaceItemStatementRequest: ReplaceItemStatementRequest;
     ifMatch?: Array<string>;
     ifNoneMatch?: Array<string>;
     ifUnmodifiedSince?: string;
@@ -188,7 +188,7 @@ export class StatementsApi extends runtime.BaseAPI {
     /**
      * Add a new Statement to an Item
      */
-    async addItemStatementRaw(requestParameters: AddItemStatementOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async addItemStatementRaw(requestParameters: AddItemStatementOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -229,13 +229,13 @@ export class StatementsApi extends runtime.BaseAPI {
             body: AddItemStatementRequestToJSON(requestParameters['addItemStatementRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * Add a new Statement to an Item
      */
-    async addItemStatement(requestParameters: AddItemStatementOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async addItemStatement(requestParameters: AddItemStatementOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.addItemStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -243,7 +243,7 @@ export class StatementsApi extends runtime.BaseAPI {
     /**
      * Add a new Statement to a Property
      */
-    async addPropertyStatementRaw(requestParameters: AddPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async addPropertyStatementRaw(requestParameters: AddPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['propertyId'] == null) {
             throw new runtime.RequiredError(
                 'propertyId',
@@ -251,10 +251,10 @@ export class StatementsApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['addItemStatementRequest'] == null) {
+        if (requestParameters['replaceItemStatementRequest'] == null) {
             throw new runtime.RequiredError(
-                'addItemStatementRequest',
-                'Required parameter "addItemStatementRequest" was null or undefined when calling addPropertyStatement().'
+                'replaceItemStatementRequest',
+                'Required parameter "replaceItemStatementRequest" was null or undefined when calling addPropertyStatement().'
             );
         }
 
@@ -281,16 +281,16 @@ export class StatementsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AddItemStatementRequestToJSON(requestParameters['addItemStatementRequest']),
+            body: ReplaceItemStatementRequestToJSON(requestParameters['replaceItemStatementRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * Add a new Statement to a Property
      */
-    async addPropertyStatement(requestParameters: AddPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async addPropertyStatement(requestParameters: AddPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.addPropertyStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -475,7 +475,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Retrieve a single Statement from an Item
      */
-    async getItemStatementRaw(requestParameters: GetItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async getItemStatementRaw(requestParameters: GetItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -521,14 +521,14 @@ export class StatementsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Retrieve a single Statement from an Item
      */
-    async getItemStatement(requestParameters: GetItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async getItemStatement(requestParameters: GetItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.getItemStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -536,7 +536,7 @@ export class StatementsApi extends runtime.BaseAPI {
     /**
      * Retrieve Statements from an Item
      */
-    async getItemStatementsRaw(requestParameters: GetItemStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<GetItemStatements200ResponseValueInner>; }>> {
+    async getItemStatementsRaw(requestParameters: GetItemStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<Statement>; }>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -585,7 +585,7 @@ export class StatementsApi extends runtime.BaseAPI {
     /**
      * Retrieve Statements from an Item
      */
-    async getItemStatements(requestParameters: GetItemStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: Array<GetItemStatements200ResponseValueInner>; }> {
+    async getItemStatements(requestParameters: GetItemStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: Array<Statement>; }> {
         const response = await this.getItemStatementsRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -594,7 +594,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Retrieve a single Statement from a Property
      */
-    async getPropertyStatementRaw(requestParameters: GetPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async getPropertyStatementRaw(requestParameters: GetPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['propertyId'] == null) {
             throw new runtime.RequiredError(
                 'propertyId',
@@ -640,14 +640,14 @@ export class StatementsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Retrieve a single Statement from a Property
      */
-    async getPropertyStatement(requestParameters: GetPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async getPropertyStatement(requestParameters: GetPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.getPropertyStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -655,7 +655,7 @@ export class StatementsApi extends runtime.BaseAPI {
     /**
      * Retrieve Statements from a Property
      */
-    async getPropertyStatementsRaw(requestParameters: GetPropertyStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<AddItemStatement201Response>; }>> {
+    async getPropertyStatementsRaw(requestParameters: GetPropertyStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<Statement>; }>> {
         if (requestParameters['propertyId'] == null) {
             throw new runtime.RequiredError(
                 'propertyId',
@@ -704,7 +704,7 @@ export class StatementsApi extends runtime.BaseAPI {
     /**
      * Retrieve Statements from a Property
      */
-    async getPropertyStatements(requestParameters: GetPropertyStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: Array<AddItemStatement201Response>; }> {
+    async getPropertyStatements(requestParameters: GetPropertyStatementsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: Array<Statement>; }> {
         const response = await this.getPropertyStatementsRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -713,7 +713,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`
      * Retrieve a single Statement
      */
-    async getStatementRaw(requestParameters: GetStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async getStatementRaw(requestParameters: GetStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['statementId'] == null) {
             throw new runtime.RequiredError(
                 'statementId',
@@ -752,14 +752,14 @@ export class StatementsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`
      * Retrieve a single Statement
      */
-    async getStatement(requestParameters: GetStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async getStatement(requestParameters: GetStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.getStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -768,7 +768,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/statements/{statement_id}`.
      * Change elements of a single Statement of an Item
      */
-    async patchItemStatementRaw(requestParameters: PatchItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async patchItemStatementRaw(requestParameters: PatchItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -816,14 +816,14 @@ export class StatementsApi extends runtime.BaseAPI {
             body: PatchItemRequestToJSON(requestParameters['patchItemRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/statements/{statement_id}`.
      * Change elements of a single Statement of an Item
      */
-    async patchItemStatement(requestParameters: PatchItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async patchItemStatement(requestParameters: PatchItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.patchItemStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -832,7 +832,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/statements/{statement_id}`.
      * Change elements of a single Statement of a Property
      */
-    async patchPropertyStatementRaw(requestParameters: PatchPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async patchPropertyStatementRaw(requestParameters: PatchPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['propertyId'] == null) {
             throw new runtime.RequiredError(
                 'propertyId',
@@ -880,14 +880,14 @@ export class StatementsApi extends runtime.BaseAPI {
             body: PatchItemRequestToJSON(requestParameters['patchItemRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/statements/{statement_id}`.
      * Change elements of a single Statement of a Property
      */
-    async patchPropertyStatement(requestParameters: PatchPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async patchPropertyStatement(requestParameters: PatchPropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.patchPropertyStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -896,7 +896,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`
      * Change elements of a single Statement
      */
-    async patchStatementRaw(requestParameters: PatchStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async patchStatementRaw(requestParameters: PatchStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['statementId'] == null) {
             throw new runtime.RequiredError(
                 'statementId',
@@ -937,14 +937,14 @@ export class StatementsApi extends runtime.BaseAPI {
             body: PatchItemRequestToJSON(requestParameters['patchItemRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`
      * Change elements of a single Statement
      */
-    async patchStatement(requestParameters: PatchStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async patchStatement(requestParameters: PatchStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.patchStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -953,7 +953,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Replace a single Statement of an Item
      */
-    async replaceItemStatementRaw(requestParameters: ReplaceItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async replaceItemStatementRaw(requestParameters: ReplaceItemStatementOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['itemId'] == null) {
             throw new runtime.RequiredError(
                 'itemId',
@@ -968,10 +968,10 @@ export class StatementsApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['addItemStatementRequest'] == null) {
+        if (requestParameters['replaceItemStatementRequest'] == null) {
             throw new runtime.RequiredError(
-                'addItemStatementRequest',
-                'Required parameter "addItemStatementRequest" was null or undefined when calling replaceItemStatement().'
+                'replaceItemStatementRequest',
+                'Required parameter "replaceItemStatementRequest" was null or undefined when calling replaceItemStatement().'
             );
         }
 
@@ -998,17 +998,17 @@ export class StatementsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: AddItemStatementRequestToJSON(requestParameters['addItemStatementRequest']),
+            body: ReplaceItemStatementRequestToJSON(requestParameters['replaceItemStatementRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Replace a single Statement of an Item
      */
-    async replaceItemStatement(requestParameters: ReplaceItemStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async replaceItemStatement(requestParameters: ReplaceItemStatementOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.replaceItemStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -1017,7 +1017,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Replace a single Statement of a Property
      */
-    async replacePropertyStatementRaw(requestParameters: ReplacePropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async replacePropertyStatementRaw(requestParameters: ReplacePropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['propertyId'] == null) {
             throw new runtime.RequiredError(
                 'propertyId',
@@ -1032,10 +1032,10 @@ export class StatementsApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['addItemStatementRequest'] == null) {
+        if (requestParameters['replaceItemStatementRequest'] == null) {
             throw new runtime.RequiredError(
-                'addItemStatementRequest',
-                'Required parameter "addItemStatementRequest" was null or undefined when calling replacePropertyStatement().'
+                'replaceItemStatementRequest',
+                'Required parameter "replaceItemStatementRequest" was null or undefined when calling replacePropertyStatement().'
             );
         }
 
@@ -1062,17 +1062,17 @@ export class StatementsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: AddItemStatementRequestToJSON(requestParameters['addItemStatementRequest']),
+            body: ReplaceItemStatementRequestToJSON(requestParameters['replaceItemStatementRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/statements/{statement_id}`
      * Replace a single Statement of a Property
      */
-    async replacePropertyStatement(requestParameters: ReplacePropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async replacePropertyStatement(requestParameters: ReplacePropertyStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.replacePropertyStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -1081,7 +1081,7 @@ export class StatementsApi extends runtime.BaseAPI {
      * This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`
      * Replace a single Statement
      */
-    async replaceStatementRaw(requestParameters: ReplaceStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AddItemStatement201Response>> {
+    async replaceStatementRaw(requestParameters: ReplaceStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Statement>> {
         if (requestParameters['statementId'] == null) {
             throw new runtime.RequiredError(
                 'statementId',
@@ -1089,10 +1089,10 @@ export class StatementsApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['addItemStatementRequest'] == null) {
+        if (requestParameters['replaceItemStatementRequest'] == null) {
             throw new runtime.RequiredError(
-                'addItemStatementRequest',
-                'Required parameter "addItemStatementRequest" was null or undefined when calling replaceStatement().'
+                'replaceItemStatementRequest',
+                'Required parameter "replaceItemStatementRequest" was null or undefined when calling replaceStatement().'
             );
         }
 
@@ -1119,17 +1119,17 @@ export class StatementsApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: AddItemStatementRequestToJSON(requestParameters['addItemStatementRequest']),
+            body: ReplaceItemStatementRequestToJSON(requestParameters['replaceItemStatementRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AddItemStatement201ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StatementFromJSON(jsonValue));
     }
 
     /**
      * This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`
      * Replace a single Statement
      */
-    async replaceStatement(requestParameters: ReplaceStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AddItemStatement201Response> {
+    async replaceStatement(requestParameters: ReplaceStatementRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Statement> {
         const response = await this.replaceStatementRaw(requestParameters, initOverrides);
         return await response.value();
     }

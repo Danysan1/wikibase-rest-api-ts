@@ -13,30 +13,30 @@
  */
 
 import { mapValues } from '../runtime';
-import type { AddItemRequestAllOfItemStatementsValueInnerReferencesInner } from './AddItemRequestAllOfItemStatementsValueInnerReferencesInner';
+import type { StatementProperty } from './StatementProperty';
 import {
-    AddItemRequestAllOfItemStatementsValueInnerReferencesInnerFromJSON,
-    AddItemRequestAllOfItemStatementsValueInnerReferencesInnerFromJSONTyped,
-    AddItemRequestAllOfItemStatementsValueInnerReferencesInnerToJSON,
-} from './AddItemRequestAllOfItemStatementsValueInnerReferencesInner';
-import type { AddItemRequestAllOfItemStatementsValueInnerQualifiersInner } from './AddItemRequestAllOfItemStatementsValueInnerQualifiersInner';
+    StatementPropertyFromJSON,
+    StatementPropertyFromJSONTyped,
+    StatementPropertyToJSON,
+} from './StatementProperty';
+import type { StatementReferencesInner } from './StatementReferencesInner';
 import {
-    AddItemRequestAllOfItemStatementsValueInnerQualifiersInnerFromJSON,
-    AddItemRequestAllOfItemStatementsValueInnerQualifiersInnerFromJSONTyped,
-    AddItemRequestAllOfItemStatementsValueInnerQualifiersInnerToJSON,
-} from './AddItemRequestAllOfItemStatementsValueInnerQualifiersInner';
-import type { AddItemRequestAllOfItemStatementsValueInnerValue } from './AddItemRequestAllOfItemStatementsValueInnerValue';
+    StatementReferencesInnerFromJSON,
+    StatementReferencesInnerFromJSONTyped,
+    StatementReferencesInnerToJSON,
+} from './StatementReferencesInner';
+import type { StatementValue } from './StatementValue';
 import {
-    AddItemRequestAllOfItemStatementsValueInnerValueFromJSON,
-    AddItemRequestAllOfItemStatementsValueInnerValueFromJSONTyped,
-    AddItemRequestAllOfItemStatementsValueInnerValueToJSON,
-} from './AddItemRequestAllOfItemStatementsValueInnerValue';
-import type { AddItemRequestAllOfItemStatementsValueInnerProperty } from './AddItemRequestAllOfItemStatementsValueInnerProperty';
+    StatementValueFromJSON,
+    StatementValueFromJSONTyped,
+    StatementValueToJSON,
+} from './StatementValue';
+import type { StatementQualifiersInner } from './StatementQualifiersInner';
 import {
-    AddItemRequestAllOfItemStatementsValueInnerPropertyFromJSON,
-    AddItemRequestAllOfItemStatementsValueInnerPropertyFromJSONTyped,
-    AddItemRequestAllOfItemStatementsValueInnerPropertyToJSON,
-} from './AddItemRequestAllOfItemStatementsValueInnerProperty';
+    StatementQualifiersInnerFromJSON,
+    StatementQualifiersInnerFromJSONTyped,
+    StatementQualifiersInnerToJSON,
+} from './StatementQualifiersInner';
 
 /**
  * 
@@ -58,28 +58,28 @@ export interface Statement {
     rank?: StatementRankEnum;
     /**
      * 
-     * @type {AddItemRequestAllOfItemStatementsValueInnerProperty}
+     * @type {StatementProperty}
      * @memberof Statement
      */
-    property?: AddItemRequestAllOfItemStatementsValueInnerProperty;
+    property?: StatementProperty;
     /**
      * 
-     * @type {AddItemRequestAllOfItemStatementsValueInnerValue}
+     * @type {StatementValue}
      * @memberof Statement
      */
-    value?: AddItemRequestAllOfItemStatementsValueInnerValue;
+    value?: StatementValue;
     /**
      * 
-     * @type {Array<AddItemRequestAllOfItemStatementsValueInnerQualifiersInner>}
+     * @type {Array<StatementQualifiersInner>}
      * @memberof Statement
      */
-    qualifiers?: Array<AddItemRequestAllOfItemStatementsValueInnerQualifiersInner>;
+    qualifiers?: Array<StatementQualifiersInner>;
     /**
      * 
-     * @type {Array<AddItemRequestAllOfItemStatementsValueInnerReferencesInner>}
+     * @type {Array<StatementReferencesInner>}
      * @memberof Statement
      */
-    references?: Array<AddItemRequestAllOfItemStatementsValueInnerReferencesInner>;
+    references?: Array<StatementReferencesInner>;
 }
 
 
@@ -113,10 +113,10 @@ export function StatementFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         
         'id': json['id'] == null ? undefined : json['id'],
         'rank': json['rank'] == null ? undefined : json['rank'],
-        'property': json['property'] == null ? undefined : AddItemRequestAllOfItemStatementsValueInnerPropertyFromJSON(json['property']),
-        'value': json['value'] == null ? undefined : AddItemRequestAllOfItemStatementsValueInnerValueFromJSON(json['value']),
-        'qualifiers': json['qualifiers'] == null ? undefined : ((json['qualifiers'] as Array<any>).map(AddItemRequestAllOfItemStatementsValueInnerQualifiersInnerFromJSON)),
-        'references': json['references'] == null ? undefined : ((json['references'] as Array<any>).map(AddItemRequestAllOfItemStatementsValueInnerReferencesInnerFromJSON)),
+        'property': json['property'] == null ? undefined : StatementPropertyFromJSON(json['property']),
+        'value': json['value'] == null ? undefined : StatementValueFromJSON(json['value']),
+        'qualifiers': json['qualifiers'] == null ? undefined : ((json['qualifiers'] as Array<any>).map(StatementQualifiersInnerFromJSON)),
+        'references': json['references'] == null ? undefined : ((json['references'] as Array<any>).map(StatementReferencesInnerFromJSON)),
     };
 }
 
@@ -127,10 +127,10 @@ export function StatementToJSON(value?: Omit<Statement, 'id'> | null): any {
     return {
         
         'rank': value['rank'],
-        'property': AddItemRequestAllOfItemStatementsValueInnerPropertyToJSON(value['property']),
-        'value': AddItemRequestAllOfItemStatementsValueInnerValueToJSON(value['value']),
-        'qualifiers': value['qualifiers'] == null ? undefined : ((value['qualifiers'] as Array<any>).map(AddItemRequestAllOfItemStatementsValueInnerQualifiersInnerToJSON)),
-        'references': value['references'] == null ? undefined : ((value['references'] as Array<any>).map(AddItemRequestAllOfItemStatementsValueInnerReferencesInnerToJSON)),
+        'property': StatementPropertyToJSON(value['property']),
+        'value': StatementValueToJSON(value['value']),
+        'qualifiers': value['qualifiers'] == null ? undefined : ((value['qualifiers'] as Array<any>).map(StatementQualifiersInnerToJSON)),
+        'references': value['references'] == null ? undefined : ((value['references'] as Array<any>).map(StatementReferencesInnerToJSON)),
     };
 }
 

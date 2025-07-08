@@ -13,12 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
-import type { AddItemRequestAllOfItemStatementsValueInner } from './AddItemRequestAllOfItemStatementsValueInner';
+import type { Statement } from './Statement';
 import {
-    AddItemRequestAllOfItemStatementsValueInnerFromJSON,
-    AddItemRequestAllOfItemStatementsValueInnerFromJSONTyped,
-    AddItemRequestAllOfItemStatementsValueInnerToJSON,
-} from './AddItemRequestAllOfItemStatementsValueInner';
+    StatementFromJSON,
+    StatementFromJSONTyped,
+    StatementToJSON,
+} from './Statement';
 import type { AddItemRequestAllOfItemSitelinksValue } from './AddItemRequestAllOfItemSitelinksValue';
 import {
     AddItemRequestAllOfItemSitelinksValueFromJSON,
@@ -70,10 +70,10 @@ export interface AddItemRequestAllOfItem {
     sitelinks?: { [key: string]: AddItemRequestAllOfItemSitelinksValue; };
     /**
      * 
-     * @type {{ [key: string]: Array<AddItemRequestAllOfItemStatementsValueInner>; }}
+     * @type {{ [key: string]: Array<Statement>; }}
      * @memberof AddItemRequestAllOfItem
      */
-    statements?: { [key: string]: Array<AddItemRequestAllOfItemStatementsValueInner>; };
+    statements?: { [key: string]: Array<Statement>; };
 }
 
 /**

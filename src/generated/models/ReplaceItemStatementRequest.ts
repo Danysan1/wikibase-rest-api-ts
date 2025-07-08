@@ -23,48 +23,48 @@ import {
 /**
  * 
  * @export
- * @interface AddItemStatementRequest
+ * @interface ReplaceItemStatementRequest
  */
-export interface AddItemStatementRequest {
+export interface ReplaceItemStatementRequest {
     /**
      * 
      * @type {Statement}
-     * @memberof AddItemStatementRequest
+     * @memberof ReplaceItemStatementRequest
      */
     statement: Statement;
     /**
      * 
      * @type {Array<string>}
-     * @memberof AddItemStatementRequest
+     * @memberof ReplaceItemStatementRequest
      */
     tags?: Array<string>;
     /**
      * 
      * @type {boolean}
-     * @memberof AddItemStatementRequest
+     * @memberof ReplaceItemStatementRequest
      */
     bot?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof AddItemStatementRequest
+     * @memberof ReplaceItemStatementRequest
      */
     comment?: string;
 }
 
 /**
- * Check if a given object implements the AddItemStatementRequest interface.
+ * Check if a given object implements the ReplaceItemStatementRequest interface.
  */
-export function instanceOfAddItemStatementRequest(value: object): value is AddItemStatementRequest {
+export function instanceOfReplaceItemStatementRequest(value: object): value is ReplaceItemStatementRequest {
     if (!('statement' in value) || value['statement'] === undefined) return false;
     return true;
 }
 
-export function AddItemStatementRequestFromJSON(json: any): AddItemStatementRequest {
-    return AddItemStatementRequestFromJSONTyped(json, false);
+export function ReplaceItemStatementRequestFromJSON(json: any): ReplaceItemStatementRequest {
+    return ReplaceItemStatementRequestFromJSONTyped(json, false);
 }
 
-export function AddItemStatementRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): AddItemStatementRequest {
+export function ReplaceItemStatementRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): ReplaceItemStatementRequest {
     if (json == null) {
         return json;
     }
@@ -77,7 +77,7 @@ export function AddItemStatementRequestFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function AddItemStatementRequestToJSON(value?: AddItemStatementRequest | null): any {
+export function ReplaceItemStatementRequestToJSON(value?: ReplaceItemStatementRequest | null): any {
     if (value == null) {
         return value;
     }
